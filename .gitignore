@@ -10,4 +10,8 @@ out/
 *.png
 !examples/*.png
 !docs/*.png
+!web/**/*.png
 .DS_Store
+
+# local editor/preview config
+.claude/

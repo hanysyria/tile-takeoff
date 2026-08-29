@@ -110,6 +110,27 @@ print(quantities.slabs_with_allowance)                   # 21
 from tile_takeoff.blueprint import survey, render, extract_text
 ```
 
+## In the browser
+
+`web/` is a static page that does the whole job without a server: it opens the PDF
+with a bundled copy of pdf.js, runs the same cutting maths compiled to JavaScript,
+and draws the layout on a canvas. **The drawing never leaves the machine** — there is
+no upload endpoint to send it to, and the page works offline once loaded.
+
+Live at **https://hanysyria.github.io/tile-takeoff/**, or run it locally:
+
+```bash
+python -m http.server 8777 --directory web
+```
+
+`web/cutting.js` mirrors `src/tile_takeoff/cutting.py`, and `web/cutting.test.mjs`
+asserts the same reference case in both languages — if the two implementations ever
+disagree about a quantity, CI fails.
+
+```bash
+node --test web/cutting.test.mjs
+```
+
 ## As an agent skill
 
 `skill/` holds an installable [Agent Skill](https://docs.claude.com/en/docs/agents-and-tools/agent-skills)

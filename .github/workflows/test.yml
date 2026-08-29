@@ -31,3 +31,14 @@ jobs:
         run: |
           tile-takeoff --version
           tile-takeoff optimize --slab 295x175 --area 98
+
+  browser-port:
+    # The browser build reimplements the cutting maths in JavaScript. If the two
+    # ever disagree, somebody orders the wrong amount of tile — so both are tested.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node --test web/cutting.test.mjs

@@ -99,6 +99,26 @@ quantities = Takeoff(area_m2=98, tile_area_m2=best.area_m2, slab_area_m2=5.1625)
 print(quantities.slabs_with_allowance)                   # 21
 ```
 
+## في المتصفح
+
+مجلد `web/` صفحة ساكنة تنجز العمل كاملاً بلا خادم: تفتح الـPDF بنسخة مرفقة من pdf.js،
+وتشغّل حسابات التقطيع نفسها مكتوبةً بجافاسكربت، وترسم مخطط القص على canvas.
+**المخطط لا يغادر الجهاز** — إذ لا توجد أصلاً وجهة رفع يُرسل إليها، والصفحة تعمل بلا
+إنترنت بعد أول تحميل.
+
+مباشرة على **https://hanysyria.github.io/tile-takeoff/**، أو شغّلها محلياً:
+
+```bash
+python -m http.server 8777 --directory web
+```
+
+الملف `web/cutting.js` مرآةٌ لـ`src/tile_takeoff/cutting.py`، والملف `web/cutting.test.mjs`
+يثبّت الحالة المرجعية نفسها باللغتين — فإن اختلفت النسختان يوماً على كمية، سقط الـCI.
+
+```bash
+node --test web/cutting.test.mjs
+```
+
 ## كمهارة لوكيل ذكي
 
 مجلد `skill/` يحوي [مهارة وكيل](https://docs.claude.com/en/docs/agents-and-tools/agent-skills)
