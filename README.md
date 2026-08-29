@@ -4,6 +4,8 @@
 
 [العربية](README.ar.md) · MIT licensed · Python 3.10+
 
+![The same slab cut two ways: 60x60 tiles waste 44% of it, while a computed 147.5x87.5 cut wastes nothing.](docs/cut-comparison.png)
+
 Every tiling job starts with the same question: how many square metres do we need?
 Because almost nobody works it out properly, the habit across the industry is to add a
 blanket waste allowance — usually 10–20% over the net area. That number isn't an
