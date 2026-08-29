@@ -1,0 +1,52 @@
+# Publishes to PyPI when a GitHub Release is published.
+#
+# No API token is stored anywhere. This uses PyPI Trusted Publishing: GitHub
+# signs a short-lived identity for this exact workflow, and PyPI verifies it.
+# Configure the trusted publisher once at
+# https://pypi.org/manage/account/publishing/ with:
+#   owner: hanysyria   repo: tile-takeoff
+#   workflow: publish.yml   environment: pypi
+name: publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify the tests pass before shipping
+        run: |
+          pip install -e ".[dev]"
+          pytest -q
+
+      - name: Build sdist and wheel
+        run: |
+          pip install build
+          python -m build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write        # required for trusted publishing
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - uses: pypa/gh-action-pypi-publish@release/v1
