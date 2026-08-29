@@ -151,7 +151,7 @@ error rather than ignorance, which is why it can come down.
 ## Development
 
 ```bash
-git clone <this repo> && cd tile-takeoff
+git clone https://github.com/hanysyria/tile-takeoff.git && cd tile-takeoff
 pip install -e ".[dev]"
 pytest
 python examples/make_example_plan.py   # regenerate the synthetic test drawing

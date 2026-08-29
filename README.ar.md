@@ -136,7 +136,7 @@ print(quantities.slabs_with_allowance)                   # 21
 ## التطوير
 
 ```bash
-git clone <هذا المستودع> && cd tile-takeoff
+git clone https://github.com/hanysyria/tile-takeoff.git && cd tile-takeoff
 pip install -e ".[dev]"
 pytest
 python examples/make_example_plan.py   # لإعادة توليد المخطط الاصطناعي للاختبار
